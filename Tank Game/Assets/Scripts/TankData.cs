@@ -19,4 +19,8 @@ public class TankData : MonoBehaviour
     {
         mover = GetComponent<TankMover>();
     }
+    public void Shooter()
+    {
+        Debug.Log("NOOOOOOO WHYYYYYYY");
+    }
 }

@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanController : MonoBehaviour
+public class HumanController : Controller
 {
-    public TankData data;
     public enum ControlType { WASD, ArrowKeys };
     public ControlType controlType;
     // Start is called before the first frame update
     void Start()
     {
-        data = GetComponent<TankData>();
+        GameManager.instance.players.Add(this);
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         Vector3 directionToMove = Vector3.zero;
         if (controlType == ControlType.WASD)
@@ -68,5 +67,9 @@ public class HumanController : MonoBehaviour
             data.mover.MoveStraight(directionToMove);
         }
 
+    }
+    public void OnDestroy()
+    {
+        GameManager.instance.players.Remove(this);
     }
 }

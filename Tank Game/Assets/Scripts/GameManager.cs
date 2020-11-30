@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int score;
+    public List<Controller> players;
     // Start is called before the first frame update
     private void Awake()
     {

@@ -13,7 +13,7 @@ public class Mover : MonoBehaviour
     public float setTime;
     public float countdown;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         countdown = setTime;
         //
@@ -21,15 +21,19 @@ public class Mover : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        countdown -= Time.deltaTime;
-        if (countdown <= 0)
-        {
-            Debug.Log("reset");
-            countdown = setTime;
-        }
-        ttf.position = transform.position + (transform.forward * tempSpeed * Time.deltaTime);
-       
+        ///if (countdown <= 0)
+        ///{
+        ///    Debug.Log("reset");
+        /// countdown = setTime;
+        ///}
+        ///ttf.position = transform.position + (transform.forward * tempSpeed * Time.deltaTime);
+        /// 
+        /// countdown -= Time.deltaTime;
     }
+    public virtual void MoveStraight(Vector3 direction) { }
+    public virtual void MoveTo(Transform targetTransform){}
+    public virtual void Rotation(bool isClockwise) { }
+    public virtual void RotateTowards(Transform targetTransform) { }
 }

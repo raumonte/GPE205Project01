@@ -26,7 +26,7 @@ public class MapGenerator : MonoBehaviour
         //for every col that needs to be created
         for(int currentCol = 0; currentCol < cols; currentCol++) {
                 //create a new random room
-                GameObject tempRoom = Instantiate(GetRandomRoom().gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+                //GameObject tempRoom = Instantiate(GetRandomRoom().gameObject, Vector3.zero, Quaternion.identity) as GameObject;
             //move the room and put it in the right space
 
             //save that room in the correct location in the array
@@ -34,9 +34,9 @@ public class MapGenerator : MonoBehaviour
         }
         }
     }
-    public Room GetRandomRoom()
-    {
-        int randomNumber = Random.Range(0, roomTemplate.Length);
-        return roomTemplate[randomNumber];
-    }
+    //public Room GetRandomRoom()
+    //{
+    //    int randomNumber = Random.Range(0, roomTemplate.Length);
+    //    return roomTemplate[randomNumber];
+    //}
 }
