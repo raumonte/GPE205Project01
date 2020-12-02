@@ -156,9 +156,9 @@ public class AIController : Controller
     {
         // TODO: Line of sight
         //Get Vector to target
-        Vector3 vectorToTarget = target.transform.position - transform.position;
+        Vector3 vectorToTarget = target.transform.position - data.transform.position;
         //Get angle between forward and vectorToTarget
-        float angle = Vector3.Angle(transform.forward, vectorToTarget);
+        float angle = Vector3.Angle(data.transform.forward, vectorToTarget);
         //if that > my field of view, they are out of view
         if (angle > fieldOfView)
         {
@@ -168,7 +168,7 @@ public class AIController : Controller
         //Raycast forward for the distance
         RaycastHit hitInfo;
         // if it hits something within viewDistance
-        if ( Physics.Raycast(transform.position, transform.forward, out hitInfo, viewDistance))
+        if ( Physics.Raycast(data.transform.position, data.transform.forward, out hitInfo, viewDistance))
         {
             //if it hits something, and it is not my target , i can't see my target
             if (hitInfo.collider !=target)
@@ -182,7 +182,7 @@ public class AIController : Controller
     public bool CanHear(GameObject target)
     {
         //TODO: Distance Check and 
-        if (Vector3.Distance(target.transform.position, transform.position) < hearingSensitivity)
+        if (Vector3.Distance(target.transform.position, data.transform.position) < hearingSensitivity)
         {
             //TODO: Soundmaker level check
 
