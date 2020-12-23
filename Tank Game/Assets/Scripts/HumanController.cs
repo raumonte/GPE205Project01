@@ -18,11 +18,12 @@ public class HumanController : Controller
         Vector3 directionToMove = Vector3.zero;
         if (controlType == ControlType.WASD)
         {
+            //When the player presses the W key it begins to move forward.
             if (Input.GetKey(KeyCode.W))
             {
                 directionToMove = transform.forward;
             }
-
+            //When the player presses the W key it begins to rotate to the
             if (Input.GetKey(KeyCode.A))
             {
                 data.mover.Rotation(false);
@@ -39,6 +40,10 @@ public class HumanController : Controller
                 data.mover.Rotation(true);
             }
             data.mover.MoveStraight(directionToMove);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                data.mover.Shoot(data.bullet, data.shootOffset, data.fireRateModifier);
+            }
         }
         if (controlType == ControlType.ArrowKeys)
         {
@@ -64,7 +69,12 @@ public class HumanController : Controller
             {
                 directionToMove = -transform.forward;
             }
+            if (Input.GetKey(KeyCode.Keypad0))
+            {
+                data.mover.Shoot(data.bullet, data.shootOffset, data.fireRateModifier);
+            }
             data.mover.MoveStraight(directionToMove);
+
         }
 
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIController : Controller
 {
-    public TankData data; //The Tank that is controlled by the AI
+    //public TankData data; //The Tank that is controlled by the AI
     public List<Waypoint> waypoints; //This gives the designer control of the amount of set waypoints.
     public int currentWaypointIndex = 0; //This keeps in track the ampunt of Waypoints hit.
     public float closeEnoughForWaypoints = 0.1f;
@@ -16,6 +16,10 @@ public class AIController : Controller
 
     public enum AIStates { Idle, Spin , Attack }
     public AIStates currentState = AIStates.Idle;
+    public enum AIAvoidanceState {Normal, TurnToAvoid, MoveToAvoid }
+    public AIAvoidanceState currentAvoidanceState;
+    public float lastStateChangeTime;
+    public float lastAvoidanceStateChangeTime;
     //targeting
     public GameObject target;
 
@@ -36,9 +40,28 @@ public class AIController : Controller
             DoPatrol();
         }
     }
+    public void ChangeState (AIStates newState)
+    {
+        //Set current state.
+        currentState = newState;
+        //Keep track of the time when in the state
+        lastStateChangeTime = Time.time;
+    }
+    public void ChangeAvoidenceState (AIAvoidanceState newState)
+    {
+        //setting a state
+        currentAvoidanceState = newState;
+        //Keep track of the time when in the state.
+        lastAvoidanceStateChangeTime = Time.time;
+    }
+    //this would try to go past a wall by continuosly checking if the wall is pasable after a bit of time.
+    public bool CanMoveForward (float distance)
+    {
+        return !Physics.Raycast(data.transform.position, data.transform.forward, distance);
+    }
     public void DoPatrol()
     {
-
+        if (currentAvoidanceState == AIAvoidanceState.Normal) { 
         //TODO: Turn towards our waypoint
         data.mover.MoveTo(waypoints[currentWaypointIndex].transform);
         
@@ -93,6 +116,7 @@ public class AIController : Controller
 
             }
         }
+      }
     }
     public void DoTargetPlayer()
     {
@@ -116,7 +140,7 @@ public class AIController : Controller
         }
         //Move to 1 unit In Front of target
         //Shoot
-        data.Shooter();
+        //data.Shoot();
 
     }
     public void DoAttackTarget()
@@ -128,7 +152,7 @@ public class AIController : Controller
             data.mover.MoveTo(target.transform);
         }
         //Shoot
-        data.Shooter();
+        //data.Shoot();
 
     }
     public void DoSpin()
@@ -150,7 +174,7 @@ public class AIController : Controller
     public void DoShoot() 
     {
         //Just shooting from the Tank itself.
-        data.Shooter();
+        //data.Shoot();
     }
     public bool CanSee(GameObject target)
     {

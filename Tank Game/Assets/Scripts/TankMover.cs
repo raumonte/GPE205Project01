@@ -9,6 +9,9 @@ public class TankMover : Mover
     /// </summary>
     private CharacterController cc;
     private TankData data;
+    public float shotCoolDown; //This float will be used as a cool down for how long they are able to shoot again.
+    public float bulletSpeed = 1.0f; //This float will be used to edit the speed of the bullet and see how far it travel
+    public Transform spawnpointTransform;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -16,6 +19,8 @@ public class TankMover : Mover
         data = GetComponent<TankData>();
         cc.slopeLimit = 90f;
         cc.stepOffset = 0.00f;
+        shotCoolDown = Time.time;
+        
     }
 
     // Update is called once per frame
@@ -37,6 +42,20 @@ public class TankMover : Mover
         {
            transform.Rotate(new Vector3(0, -data.rotateSpeed * Time.deltaTime, 0));
 
+        }
+    }
+    public virtual void Shoot(GameObject bullet,Vector3 offset, float fireRateModifier)        //Shoot A Shell
+    {
+        if (Time.time >= shotCoolDown)                         //If You Waited The Reload Time
+        {
+            Debug.Log("Shoot successful");
+                        
+            //Instantiate shell
+            GameObject shell = GameObject.Instantiate(bullet, spawnpointTransform.position + (spawnpointTransform.forward * offset.x) + (spawnpointTransform.up * offset.y), spawnpointTransform.rotation);
+            //Add force
+            shell.GetComponent<Rigidbody>().AddForce(shell.transform.forward * bulletSpeed);
+
+            shotCoolDown = Time.time + (bullet.GetComponent<Bullet>().fireRate * (1 / fireRateModifier));
         }
     }
     public override void MoveTo(Transform targetTransform)

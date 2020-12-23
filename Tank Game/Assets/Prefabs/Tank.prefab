@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &97427463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 97427464}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &97427464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97427463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.023, y: 1.273, z: 2.039}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8678971749634106719}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8678971749634106716
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +65,7 @@ Transform:
   - {fileID: 8678971750061819589}
   - {fileID: 8678971749874176243}
   - {fileID: 8678971750357416797}
+  - {fileID: 97427464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -50,11 +81,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effcf431a95bbf647a266698ebd8f6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 20
   mover: {fileID: 0}
   speed: 2
   rotateSpeed: 180
   damageDone: 0
-  shootDelay: 0
+  shootDelay: 1
+  bullet: {fileID: 8201381316622958597, guid: 7eb1fd580b481e04b9e790ee33d76754, type: 3}
+  shootOffset: {x: 0.8, y: 0.25}
+  fireRateModifier: 1
 --- !u!114 &8678971749634106689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0076575212f6250469dfc3028bff69ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSpeed: 0
+  ttf: {fileID: 0}
+  setTime: 0
+  countdown: 0
+  shotCoolDown: 0
+  bulletSpeed: 750
+  spawnpointTransform: {fileID: 97427464}
 --- !u!114 &8678971749634106718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55126b192c90298489673e527f5d6fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 8678971749634106688}
+  mover: {fileID: 0}
   controlType: 0
 --- !u!143 &8678971749634106691
 CharacterController:
@@ -10550,6 +10593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8678971750061819589}
+  - component: {fileID: 1533262042}
   m_Layer: 0
   m_Name: Tank Player
   m_TagString: Untagged
@@ -10571,6 +10615,19 @@ Transform:
   m_Father: {fileID: 8678971749634106719}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
+--- !u!65 &1533262042
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678971750061819586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9335635, y: 2.2398052, z: 3.113014}
+  m_Center: {x: 0.069245696, y: 0.61990273, z: 0.21191224}
 --- !u!1 &8678971750357416790
 GameObject:
   m_ObjectHideFlags: 0

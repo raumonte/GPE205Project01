@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class DamageManager : MonoBehaviour
 {
-    public TankData data;
-    public TankMover mover;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,4 +11,8 @@ public class Controller : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
