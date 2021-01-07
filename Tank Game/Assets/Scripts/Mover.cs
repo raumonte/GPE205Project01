@@ -5,8 +5,7 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     /// <summary>
-    /// Currently this script is being used to test out Time.deltaTime. Which takes things by secconds rather than
-    /// frames which is what the update does.
+    /// 
     /// </summary>
     public float tempSpeed;
     public Transform ttf;

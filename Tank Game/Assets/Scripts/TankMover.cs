@@ -55,7 +55,7 @@ public class TankMover : Mover
             //Add force
             shell.GetComponent<Rigidbody>().AddForce(shell.transform.forward * bulletSpeed);
 
-            shotCoolDown = Time.time + (bullet.GetComponent<Bullet>().fireRate * (1 / fireRateModifier));
+            shotCoolDown = Time.time + (bullet.GetComponent<BulletData>().fireRate * (1 / fireRateModifier));
         }
     }
     public override void MoveTo(Transform targetTransform)
