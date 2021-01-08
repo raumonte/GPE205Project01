@@ -5,6 +5,8 @@ using UnityEngine;
 public class BulletData : MonoBehaviour
 {
     public LayerMask tankMask;
+    public ParticleSystem explosionParticles;
+    public AudioSource explosionAudio;
     public float speed = 1;                //Speed The Shell Flies At
     public int damage = 1;                 //Damage The Shell Deals
     public float fireRate = 1.0f;          //Time Between Shots
@@ -23,7 +25,15 @@ public class BulletData : MonoBehaviour
         //Having it to check them 
         for (int i = 0; i < colliders.Length; i++)
         {
-
+            //Check the rigid body of the object
+            Rigidbody targetRigidbody = colliders[i].GetComponent<Rigidbody>();
+            //Has it found a rigid body
+            if (!targetRigidbody)
+                continue;
+            //Add force to push it
+            targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            //
+            //[Tank Health instance of the script]
         }
     }
 }
