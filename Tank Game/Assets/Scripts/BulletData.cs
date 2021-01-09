@@ -33,13 +33,13 @@ public class BulletData : MonoBehaviour
             // TODO: Add force to push tank
             targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             // TODO: Begin to apply damage to the tank player script (in the tutorial has a script by itself for the health of the tank)
-            // [Tank Health instance of the script] target health = targetRigidbody.GetComponent<TankHealth>();
-            //if(!targethealth)
-            // continue;
+            TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
+            if(!targetHealth)
+             continue;
             // TODO: Create damage by seeing how far it is from the explosion.
             float damage = CalculateDamage (targetRigidbody.position);
             //Upadtes the amount of health left to the player.
-            //targetHealth.TakeDamage(damage);
+            targetHealth.DamageAmount(damage);
         }
         // TODO: Spawn the particle affect of the explosion
         explosionParticles.transform.parent = null;
