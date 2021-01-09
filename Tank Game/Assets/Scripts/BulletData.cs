@@ -8,7 +8,7 @@ public class BulletData : MonoBehaviour
     public ParticleSystem explosionParticles;
     public AudioSource explosionAudio;
     public float speed = 1;                //Speed The Shell Flies At
-    public int damage = 1;                 //Damage The Shell Deals
+    public float maxDamage = 1f;                 //Damage The Shell Deals
     public float fireRate = 1.0f;          //Time Between Shots
     public float timeTillDestroy = 3;      //Time The Object Stays Before Being Destroyed
     public float explosionRadius = 5f;     //The Radius of how far the explosion will affect the players.
@@ -30,10 +30,35 @@ public class BulletData : MonoBehaviour
             //Has it found a rigid body
             if (!targetRigidbody)
                 continue;
-            //Add force to push it
+            // TODO: Add force to push tank
             targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
-            //
-            //[Tank Health instance of the script]
+            // TODO: Begin to apply damage to the tank player script (in the tutorial has a script by itself for the health of the tank)
+            // [Tank Health instance of the script] target health = targetRigidbody.GetComponent<TankHealth>();
+            //if(!targethealth)
+            // continue;
+            // TODO: Create damage by seeing how far it is from the explosion.
+            float damage = CalculateDamage (targetRigidbody.position);
+            //Upadtes the amount of health left to the player.
+            //targetHealth.TakeDamage(damage);
         }
+        // TODO: Spawn the particle affect of the explosion
+        explosionParticles.transform.parent = null;
+        explosionParticles.Play();
+        Destroy(explosionParticles.gameObject, explosionParticles.main.duration);
+        // TODO: Play the audio file for the explosion.
+        explosionAudio.Play();
+    }
+    private float CalculateDamage(Vector3 targetPosition)
+    {
+        
+        //Calculate the amount of damage a target should take based on the position of the player
+        Vector3 explosionToTraget = targetPosition - transform.position;
+        float explosionDistance = explosionToTraget.magnitude;
+        float relativeDistance = (explosionRadius - explosionDistance) / explosionRadius;
+        float damage = relativeDistance * maxDamage;
+        damage = Mathf.Max(0f, damage);
+        Debug.Log(damage);
+        return damage;
+        
     }
 }
