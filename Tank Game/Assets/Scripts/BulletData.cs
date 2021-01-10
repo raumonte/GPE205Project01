@@ -31,15 +31,17 @@ public class BulletData : MonoBehaviour
             if (!targetRigidbody)
                 continue;
             // TODO: Add force to push tank
-            targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            //targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             // TODO: Begin to apply damage to the tank player script (in the tutorial has a script by itself for the health of the tank)
             TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
-            if(!targetHealth)
-             continue;
+            //if(!targetHealth)
+            //continue;
             // TODO: Create damage by seeing how far it is from the explosion.
-            float damage = CalculateDamage (targetRigidbody.position);
-            //Upadtes the amount of health left to the player.
-            targetHealth.DamageAmount(damage);
+            //float damage = CalculateDamage (targetRigidbody.position);
+            //Updates the amount of health left to the player.
+            targetHealth.DamageAmount(10);
+            
+            Debug.Log("hit has been his");
         }
         // TODO: Spawn the particle affect of the explosion
         explosionParticles.transform.parent = null;
@@ -48,7 +50,8 @@ public class BulletData : MonoBehaviour
         // TODO: Play the audio file for the explosion.
         explosionAudio.Play();
     }
-    private float CalculateDamage(Vector3 targetPosition)
+    /*
+     * private float CalculateDamage(Vector3 targetPosition)
     {
         
         //Calculate the amount of damage a target should take based on the position of the player
@@ -61,4 +64,5 @@ public class BulletData : MonoBehaviour
         return damage;
         
     }
+     */
 }

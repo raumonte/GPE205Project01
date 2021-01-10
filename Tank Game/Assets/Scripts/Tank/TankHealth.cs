@@ -14,7 +14,7 @@ public class TankHealth : MonoBehaviour
 
     private AudioSource explosionAudio;
     private ParticleSystem explosionParticles;
-    private float currentHealth;
+    public float currentHealth;
     private bool isPlayerDead;
 
     private void Awake()
@@ -39,6 +39,7 @@ public class TankHealth : MonoBehaviour
     {
         //TODO: Set the amount of damage from the bullet script.
         currentHealth -= amount;
+        Debug.Log(amount);
         
         //Once the player(s) take damage it will call this function to update the UI
         SetHealthUI();
